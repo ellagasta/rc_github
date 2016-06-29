@@ -5,7 +5,6 @@ map j <Left>
 map k <Down>
 
 set t_Co=256
-colorscheme wombat256mod
 
 set ffs=unix,dos 
 

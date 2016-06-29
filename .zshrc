@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/ethan/.oh-my-zsh
+  export ZSH=/Users/ethan/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -58,6 +58,28 @@ plugins=(git command-not-found coffee common-aliases last-working-dir npm web-se
 
 source $ZSH/oh-my-zsh.sh
 
+git-rekt() {
+    dir=$(git rev-parse --show-toplevel)
+    url=$(git remote get-url origin)
+    cd $dir
+    reponame=$(basename "$PWD")
+    cd ..
+    rm -rf $dir
+    git clone $url
+    cd $reponame
+}
+
+git() {
+    if [ "$1" = "gud" ]
+    then
+        git-gud
+    elif [ "$1" = "rekt" ]
+    then
+        git-rekt
+    else
+       /usr/bin/git "$@"
+    fi
+}
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -82,3 +104,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias mr='mvn release:clean release:prepare release:perform'
+alias mi='mvn clean install'
+alias gd='git diff'
+alias gs='git status'
+alias 'git-gud'='git reset --hard'

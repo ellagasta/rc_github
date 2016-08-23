@@ -58,28 +58,6 @@ plugins=(git command-not-found coffee common-aliases last-working-dir npm web-se
 
 source $ZSH/oh-my-zsh.sh
 
-git-rekt() {
-    dir=$(git rev-parse --show-toplevel)
-    url=$(git remote get-url origin)
-    cd $dir
-    reponame=$(basename "$PWD")
-    cd ..
-    rm -rf $dir
-    git clone $url
-    cd $reponame
-}
-
-git() {
-    if [ "$1" = "gud" ]
-    then
-        git-gud
-    elif [ "$1" = "rekt" ]
-    then
-        git-rekt
-    else
-       /usr/bin/git "$@"
-    fi
-}
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -107,5 +85,33 @@ git() {
 alias mr='mvn release:clean release:prepare release:perform'
 alias mi='mvn clean install'
 alias gd='git diff'
+alias gcm='git checkout master'
 alias gs='git status'
 alias 'git-gud'='git reset --hard'
+alias pread='psql postgres://kamcord:EBqkaVYnG2uPNH6v@data-service-prod.cxwiod6cevwr.us-east-1.rds.amazonaws.com:5432/kamcord'
+
+alias preads='psql postgres://kamcord:EBqkaVYnG2uPNH6v@data-service-staging.cxwiod6cevwr.us-east-1.rds.amazonaws.com/kamcord'
+alias pokego='cd ~/Downloads/PokemonGo-Map-master; python ./example.py -a ptc -u etgreat -p ryhtrsy -l "301 Howard St, San Francisco" -st 10 -i "pidgey, zubat, rattata, spearow, doduo"'
+
+git-rekt() {
+    dir=$(git rev-parse --show-toplevel)
+    url=$(git remote get-url origin)
+    cd $dir
+    reponame=$(basename "$PWD")
+    cd ..
+    rm -rf $dir
+    git clone $url
+    cd $reponame
+}
+
+git() {
+    if [ "$1" = "gud" ]
+    then
+        git-gud
+    elif [ "$1" = "rekt" ]
+    then
+        git-rekt
+    else
+       /usr/bin/git "$@"
+    fi
+}
